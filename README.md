@@ -28,9 +28,9 @@
 
 | Column         | Type       | Options                         |
 | -------------- | ---------- | ------------------------------- |
-| name           | text       | null: false                     |
+| name           | string     | null: false                     |
 | description    | text       | null: false                     |
-| user           | references | ull: false, foreign_key: true   |
+| user           | references | null: false, foreign_key: true  |
 | category_id    | integer    | null: false                     |
 | condition_id   | integer    | null: false                     |
 | postage_id     | integer    | null: false                     |
@@ -41,7 +41,7 @@
 ### Association
 
 - belongs_to :user
-- has_many :orders
+- has_one :order
 - has_many :comments
 - has_many :favorites
 - has_many :warnings
@@ -73,14 +73,13 @@
 | post_code     | string     | null: false                    |
 | prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
-| address       | text       | null: false                    |
-| building      | text       |                                |
+| address       | string     | null: false                    |
+| building      | string     |                                |
 | phone_number  | string     | null: false                    |
 
 ### Association
 
-- belongs_to :orders
-- belongs_to :prefectures
+- belongs_to :order
 
 
 ## comments テーブル

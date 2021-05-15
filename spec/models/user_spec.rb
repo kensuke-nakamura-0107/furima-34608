@@ -1,23 +1,17 @@
 require 'rails_helper'
 
-FactoryBot.define do
-  factory :user do
-    nickname {Faker::Name.last_name}
-    email {Faker::Internet.free_email}
-    password {Faker::Internet.password(min_length: 6)}
-    password_confirmation {password}
-    last_name_kanji{"田中"}
-    first_name_kanji{"太郎"}
-    last_name_kana{"タナカ"}
-    first_name_kana{"タロウ"}
-    birthday{Faker::Date.birthday}
-  end
-end
-
 RSpec.describe User, type: :model do
   before do
     @user = FactoryBot.build(:user)
   end
+
+  context '内容に問題ない場合' do
+
+  end
+
+
+  context '内容に問題がある場合' do
+
 
   describe "ユーザー新規登録" do
     it "ニックネーム必須" do
@@ -40,8 +34,8 @@ RSpec.describe User, type: :model do
       expect(another_user.errors.full_messages).to include('Email has already been taken')
     end
 
-    it "メールアドレスに@あり" do
-      @user.email = 'absd@com'
+    it "@がないと登録できない" do
+      @user.email = 'absdcom'
       @user.valid?
       expect(@user.errors.full_messages).to include("Email is invalid")
     end
@@ -58,8 +52,20 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
     end
 
-    it "パスワード半角英数字混合" do
+    it "パスワード半角数値のみはNG" do
       @user.password = '000000'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid")
+    end
+
+    it "パスワード半角英字のみNG" do
+      @user.password = 'aaaaaa'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid")
+    end
+
+    it "パスワード全角英数混合NG" do
+      @user.password = 'ＡＤＤＡＯＥ７３２０８０'
       @user.valid?
       expect(@user.errors.full_messages).to include("Password is invalid")
     end
@@ -124,6 +130,8 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Birthday can't be blank")
     end
+    
+  end
 
   end
 end

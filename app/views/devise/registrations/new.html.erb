@@ -11,7 +11,7 @@
   </div>
 
   <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
-  <%# render 'shared/error_messages', model: f.object %>
+  <%= render partial:'devise/shared/error_messages', model:f.object %>
   <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
 
   <div class="form-group">
@@ -97,7 +97,9 @@
       <span>利用規約</span>
       <br>に同意したものとみなします
     </h2>
+  
   </div>
+  
   <div class='register-btn'>
     <%= f.submit "会員登録" ,class:"register-red-btn" %>
   </div>

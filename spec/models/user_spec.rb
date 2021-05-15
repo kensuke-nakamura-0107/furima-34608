@@ -6,7 +6,9 @@ RSpec.describe User, type: :model do
   end
 
   context '内容に問題ない場合' do
-
+    it "問題ナシパターン" do
+      expect(@user).to be_valid
+    end
   end
 
 

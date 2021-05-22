@@ -2,12 +2,12 @@ class Item < ApplicationRecord
 
   validates :name, presence: true
   validates :description, presence: true
-  validates :category_id, presence: true
+  validates :category_id, numericality: { other_than: 1 } 
   validates :image, presence: true
   validates :condition_id, numericality: { other_than: 1 } 
-  validates :postage_id, presence: true
-  validates :prefecture_id, presence: true
-  validates :period_id , presence: true
+  validates :postage_id, numericality: { other_than: 1 } 
+  validates :prefecture_id, numericality: { other_than: 1 } 
+  validates :period_id , numericality: { other_than: 1 } 
   validates :price, presence: true
 
   belongs_to :user
@@ -22,5 +22,6 @@ class Item < ApplicationRecord
   belongs_to :category
   belongs_to :postage
   belongs_to :prefecture
+  belongs_to :period
 
 end

@@ -5,7 +5,6 @@ class ItemsController < ApplicationController
   end
 
   def new
-
     @item = Item.new
   end
   
@@ -15,8 +14,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path
     else
-      #render :new
-      redirect_to root_path
+      render :new
     end
   end
 

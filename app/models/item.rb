@@ -24,4 +24,8 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :period
 
+  def was_attached?
+    self.image.attached?
+  end
+
 end

@@ -1,14 +1,16 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
 
   def index
   end
 
   def new
+    authenticate_user!
     @item = Item.new
   end
   
   def create
+    authenticate_user!
     @item = Item.new(item_params)
     
     if @item.save

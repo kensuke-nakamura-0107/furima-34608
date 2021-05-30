@@ -1,13 +1,19 @@
 class Item < ApplicationRecord
 
-  validates :name, presence: true
-  validates :description, presence: true
-  validates :category_id, numericality: { other_than: 1 } 
-  validates :image, presence: true
-  validates :condition_id, numericality: { other_than: 1 } 
-  validates :postage_id, numericality: { other_than: 1 } 
-  validates :prefecture_id, numericality: { other_than: 1 } 
-  validates :period_id , numericality: { other_than: 1 } 
+  with_options presence: true do
+    validates :name
+    validates :description
+    validates :image
+  end
+
+  with_options numericality: { other_than: 1 }  do
+    validates :category_id
+    validates :condition_id
+    validates :postage_id
+    validates :prefecture_id
+    validates :period_id
+  end
+  
   validates :price,  presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
 
   belongs_to :user
@@ -23,9 +29,5 @@ class Item < ApplicationRecord
   belongs_to :postage
   belongs_to :prefecture
   belongs_to :period
-
-  def was_attached?
-    self.image.attached?
-  end
 
 end

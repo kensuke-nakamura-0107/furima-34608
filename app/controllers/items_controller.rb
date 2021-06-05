@@ -2,8 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    query = "SELECT * FROM items ORDER BY id desc"
-    @items = Item.find_by_sql(query)
+    @items = Item.all.order(created_at: :desc)
 
   end
 

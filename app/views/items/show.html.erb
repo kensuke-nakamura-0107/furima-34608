@@ -23,17 +23,16 @@
 
     <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合 %>
     <% if user_signed_in?%>
-      <%if current_user.id == @item.user_id %>
+      <% if current_user.id == @item.user_id %>
        <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
        <p class="or-text">or</p>
        <%= link_to "削除", "#", method: :delete, class:"item-destroy" %>
     <%# ログインしているユーザーと出品しているユーザーが、同一人物ではない場合 %>
-      <% elsif current_user.id != @item.user_id%>
-       <%# 備忘：商品が売れてる/売れてないの場合分けは購入機能実装後に対応 %>
-       <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
-       <%# 備忘：商品が売れてる/売れてないの場合分けは購入機能実装後に対応 %>
+    <% else%>
+    <%# 備忘：商品が売れてる/売れてないの場合分けは購入機能実装後に対応 %>
+    <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
+   <%# 備忘：商品が売れてる/売れてないの場合分けは購入機能実装後に対応 %>
     <% end %>
-
     <% end %>
 
     <div class="item-explain-box">

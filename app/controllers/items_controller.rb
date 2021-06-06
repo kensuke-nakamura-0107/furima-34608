@@ -25,17 +25,16 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless user_signed_in? && current_user.id == @item.user_id
+    unless current_user.id == @item.user_id
       redirect_to action: :index
     end
   end
 
   def update
-    unless user_signed_in? && current_user.id == @item.user_id
+    unless current_user.id == @item.user_id
     if  @item.update(item_params)
       redirect_to item_path
     else
-      @item = item
       render action: :edit
     end
   end
